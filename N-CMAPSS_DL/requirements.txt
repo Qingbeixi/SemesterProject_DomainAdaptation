@@ -1,0 +1,11 @@
+h5py
+pandas
+matplotlib>=3.0.3
+seaborn
+sklearn
+pytorch-gpu
+numpy
+scikit-learn
+tqdm
+
+
