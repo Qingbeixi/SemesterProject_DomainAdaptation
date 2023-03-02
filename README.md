@@ -26,47 +26,10 @@ python3 sample_creator_unit_auto.py -w 50 -s 1 --test 1 --sampling 10
 &ndash;  test : select train or test, if it is zero, then the code extracts samples from the engines used for training. Otherwise, it creates samples from test engines<br/>
 &ndash;  sampling : subsampling the data before creating the output array so that we can set assume different sampling rate to mitigate memory issues. 
 
-
-Please note that we used N = 6 units (u = 2, 5, 10, 16, 18 & 20) for training and M = 3  units (u = 11, 14 & 15) for test, same as for the setting used in [[3]](#3). <br/>
-
-The size of the dataset is significantly large and it can cause memory issues by excessive memory use. Considering memory limitation that may occur when you load and create the samples, we set the data type as 'np.float32' to reduce the size of the data while the data type of the original data is 'np.float64'. Based on our experiments, this does not much affect to the performance when you use the data to train a DL network. If you want to change the type, please check 'data_preparation_unit.py' file in /utils folder.  <br/>
-
-In addition, we offer the data subsampling to handle 'out-of-memory' issues from the given dataset that use the sampling rate of 1Hz. When you set this subsampling input as 10, then it indicates you only take only 1 sample for every 10, the sampling rate is then 0.1Hz. 
-
-Finally, you can have 9 npz file in /N-CMAPSS/Samples_whole folder. <br/>
-
-Each compressed file contains two arrays with different labels: 'sample' and 'label'. In the case of the test units, 'label' indicates the ground truth RUL of the test units for evaluation. 
-
-For instance, one of the created file, Unit2_win50_str1_smp10.npz, its filename indicates that the file consists of a collection of the sliced time series by time window size 50 from the trajectory of engine (unit) 2 with the sampling rate of 0.1Hz. <br/>
-
-## Load created samples
-At first, you should load each of the npy files created in /Samples_whole folder. Then, the samples from the different engines should be aggregated. 
+Finally, run 
 ```bash
-def load_part_array_merge (npz_units):
-    sample_array_lst = []
-    label_array_lst = []
-    for npz_unit in npz_units:
-      loaded = np.load(npz_unit)
-      sample_array_lst.append(loaded['sample'])
-      label_array_lst.append(loaded['label'])
-    sample_array = np.dstack(sample_array_lst)
-    label_array = np.concatenate(label_array_lst)
-    sample_array = sample_array.transpose(2, 0, 1)
-    return sample_array, label_array
+python3 baseline_run.py 
 ```
-The shape of your sample array should be (# of samples from all the units, window size, # of variables)
 
-
-## References
-<a id="1">[1]</a> 
-Frederick, Dean & DeCastro, Jonathan & Litt, Jonathan. (2007). User's Guide for the Commercial Modular Aero-Propulsion System Simulation (C-MAPSS). NASA Technical Manuscript. 2007–215026. 
-
-<a id="2">[2]</a> 
-Chao, Manuel Arias, Chetan Kulkarni, Kai Goebel, and Olga Fink. "Aircraft Engine Run-to-Failure Dataset under Real Flight Conditions for Prognostics and Diagnostics." Data. 2021; 6(1):5. https://doi.org/10.3390/data6010005
-
-<a id="3">[3]</a> 
-Chao, Manuel Arias, Chetan Kulkarni, Kai Goebel, and Olga Fink. "Fusing physics-based and deep learning models for prognostics." Reliability Engineering & System Safety 217 (2022): 107961.
-
-<a id="3">[4]</a> 
-Mo, Hyunho, and Giovanni Iacca. "Multi-Objective Optimization of Extreme Learning Machine for Remaining Useful Life Prediction." EvoApplications, part of EvoStar 2022 (2022), to appear.
+More information about the dataset could be seen on the referenced github repository
 
