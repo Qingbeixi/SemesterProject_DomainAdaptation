@@ -12,6 +12,7 @@ import torch.optim
 from helps import *
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, TensorDataset
+import json
 
 "get the path to files"
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +38,7 @@ def main():
     parser.add_argument('-lr', type=float, default=0.001, help='learning rate')
     parser.add_argument('-sub', type=int, default=10, help='subsampling stride')
     parser.add_argument('--sampling', type=int, default=10, help='sub sampling of the given data. If it is 10, then this indicates that we assumes 0.1Hz of data collection')
-
+    parser.add_argument('-model', type=str, default='ExtractorRegressor', help='model type to choose')
 
 
     args = parser.parse_args()
@@ -54,6 +55,7 @@ def main():
     vs = args.vs
     sub = args.sub
     sampling = args.sampling
+    mymodel = args.model
 
     train_units_samples_lst =[]
     train_units_labels_lst = []
@@ -97,8 +99,12 @@ def main():
     train_dataset = TurbineDataset(X_train,y_train)
 
     # # Initialize model and optimizer
-    # model = VAERegressor(input_dim=1000, latent_dim=50, hidden_dim=200)
-    model = FullModel() # receive(batch_size,50,20) 
+    if mymodel == "ExtractorRegressor": 
+        model = FullModel() # receive(batch_size,50,20) 
+        # model.load_state_dict(torch.load(os.path.join("models", "mymodel"+".pt")))
+    else:
+        model = VAERegressor(input_dim=1000, latent_dim=50, hidden_dim=200)
+    
     optimizer = optim.Adam(model.parameters(), lr=1e-3, betas = (0.9,0.999), eps=1e-07, amsgrad=True)
     
     # Check if GPU is available
@@ -107,7 +113,7 @@ def main():
     # Move the model to the GPU
     model.to(device)
     # Train the model
-    num_epochs = 30
+    num_epochs = 50
 
     # torch.autograd.set_detect_anomaly(True)
     criterion = nn.MSELoss()
@@ -116,12 +122,13 @@ def main():
         dataloader = DataLoader(train_dataset, batch_size=bs, shuffle=True)
         for i, (x_batch, y_batch) in enumerate(dataloader):
             x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-            # y_pred, mu, logvar = model(x_batch)
-            y_pred = model(x_batch)
-            # loss = F.mse_loss(y_pred, y_batch)
-            loss = torch.sqrt(criterion(y_pred, y_batch))
-            # kl_divergence = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-            # loss = loss + kl_divergence # cannot be in place
+            if mymodel == "ExtractorRegressor": 
+                y_pred = model(x_batch)
+                loss = torch.sqrt(criterion(y_pred, y_batch))
+            else:
+                y_pred, mu, logvar = model(x_batch)
+                kl_divergence = -0.01 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+                loss = torch.sqrt(criterion(y_pred, y_batch)) + kl_divergence # cannot be in place
             
             optimizer.zero_grad()
             loss.backward()
@@ -129,14 +136,17 @@ def main():
             
             running_loss += loss.item() * x_batch.size(0)
         epoch_loss = running_loss / len(train_dataset)
+
         print(f"Epoch {epoch+1}/{num_epochs}, RMSELoss: {epoch_loss:.4f}")
+    save_dict_loss = {}
+    save_dict_loss['Train Epochs'] = float(num_epochs)
+    save_dict_loss['Train Loss'] = float(epoch_loss)
     
     output_lst = []
     truth_lst = []
 
-    torch.save(model.state_dict(), "model.pt")
-    # model.load_state_dict(torch.load("model.pt"))
-    
+    torch.save(model.state_dict(), "models/ExtractorRegressor.pt")
+
     with torch.no_grad():
         for index in units_index_test:
             print ("test idx: ", index)
@@ -152,9 +162,17 @@ def main():
             # estimator = load_model(model_temp_path)
             sample_tensor = torch.tensor(sample_array, dtype=torch.float32)
             sample_tensor = sample_tensor.to(device)
-            # y_pred_test, _, _ = model(sample_tensor)
-            y_pred_test = model(sample_tensor)
-
+            if mymodel == "ExtractorRegressor": 
+                y_pred_test = model(sample_tensor)
+            else:
+                y_pred_test, _, _ = model(sample_tensor)
+            rms_temp = np.sqrt(mean_squared_error(y_pred_test.cpu(), label_array))
+            print("the rms for test index {} is {}".format(index,rms_temp))
+            
+            # document testing loss results
+            name = "Test Loss for unit " + str(index) 
+            save_dict_loss[name] = float(rms_temp)
+            
             output_lst.append(y_pred_test.cpu())
             truth_lst.append(label_array)
         
@@ -172,6 +190,12 @@ def main():
     print(rms)
     rms = round(rms, 2)
     print("rms for test",rms)
+    save_dict_loss["Test Loss"] = float(rms)
+    
+    with open('models' + '/%s.json'%(mymodel), 'w') as f:
+        # Write the dictionary to the file
+        print(model,file=f)
+        json.dump(save_dict_loss, f)
 
     for idx in range(len(units_index_test)):
         fig_verify = plt.figure(figsize=(24, 10))
@@ -183,7 +207,7 @@ def main():
         plt.ylabel('RUL', fontdict={'fontsize': 24})
         plt.xlabel('Timestamps', fontdict={'fontsize': 24})
         plt.legend(['Predicted', 'Truth'], loc='upper right', fontsize=28)
-        plt.show()
+        # plt.show()
         fig_verify.savefig(pic_dir + "/unit%s_test_w%s_s%s_bs%s_lr%s_sub%s_rmse-%s.png" %(str(int(units_index_test[idx])),
                                                                                 int(win_len), int(win_stride), int(bs),
                                                                                     str(lr), int(sub), str(rms)))
