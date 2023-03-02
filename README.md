@@ -26,7 +26,9 @@ python3 sample_creator_unit_auto.py -w 50 -s 1 --test 1 --sampling 10
 &ndash;  test : select train or test, if it is zero, then the code extracts samples from the engines used for training. Otherwise, it creates samples from test engines<br/>
 &ndash;  sampling : subsampling the data before creating the output array so that we can set assume different sampling rate to mitigate memory issues. 
 
-Finally, run 
+## DL model
+
+For the baseline model, run 
 ```bash
 python3 baseline_run.py 
 ```
