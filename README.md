@@ -1,4 +1,5 @@
 # N-CMAPSS_DL
+# The code is based on another github reporsitory https://github.com/mohyunho/N-CMAPSS_DL.git
 DL evaluation on N-CMAPSS
 Turbo fan engine           |  CMAPSS [[1]](#1)
 :----------------------------:|:----------------------:
