@@ -1,12 +1,6 @@
 # N-CMAPSS_DL
 # The code is based on another github reporsitory https://github.com/mohyunho/N-CMAPSS_DL.git
 DL evaluation on N-CMAPSS
-Turbo fan engine           |  CMAPSS [[1]](#1)
-:----------------------------:|:----------------------:
-![](turbo_engine.jpg)  |  ![](cmapss.png)
-
-## Prerequisites
-
 
 ## Sample creator
 Following the below instruction, you can create training/test sample arrays for machine learning model (especially for DL architectures that allow time-windowed data as input) from NASA's N-CMAPSS datafile. <br/>
