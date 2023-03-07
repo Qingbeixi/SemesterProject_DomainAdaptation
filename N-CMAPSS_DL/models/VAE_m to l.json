@@ -1,0 +1,60 @@
+VAERegressor(
+  (conv1): Conv1d(20, 10, kernel_size=(3,), stride=(1,), padding=(1,))
+  (bn1): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv2): Conv1d(10, 10, kernel_size=(3,), stride=(1,), padding=(1,))
+  (bn2): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv3): Conv1d(10, 5, kernel_size=(3,), stride=(1,), padding=(1,))
+  (bn3): BatchNorm1d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (fc_mu): Linear(in_features=250, out_features=5, bias=True)
+  (fc_logvar): Linear(in_features=250, out_features=5, bias=True)
+  (fc1): Linear(in_features=5, out_features=250, bias=True)
+  (conv4): ConvTranspose1d(5, 10, kernel_size=(3,), stride=(1,), padding=(1,))
+  (bn4): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv5): ConvTranspose1d(10, 20, kernel_size=(3,), stride=(1,), padding=(1,))
+  (fc4): Linear(in_features=250, out_features=1, bias=True)
+  (sigmoid): Sigmoid()
+)
+We apply the domain adaptation for m to l
+Train shape (30918, 50, 20)
+Test shape (49018, 50, 20)
+Epoch 1/40, Train_RMSELoss: 0.2909, Test_RMSELoss:0.2909
+Epoch 2/40, Train_RMSELoss: 0.2575, Test_RMSELoss:0.1816
+Epoch 3/40, Train_RMSELoss: 0.1571, Test_RMSELoss:0.1386
+Epoch 4/40, Train_RMSELoss: 0.1382, Test_RMSELoss:0.1468
+Epoch 5/40, Train_RMSELoss: 0.1290, Test_RMSELoss:0.1589
+Epoch 6/40, Train_RMSELoss: 0.1302, Test_RMSELoss:0.1418
+Epoch 7/40, Train_RMSELoss: 0.1285, Test_RMSELoss:0.1490
+Epoch 8/40, Train_RMSELoss: 0.1248, Test_RMSELoss:0.1373
+Epoch 9/40, Train_RMSELoss: 0.1252, Test_RMSELoss:0.1270
+Epoch 10/40, Train_RMSELoss: 0.1193, Test_RMSELoss:0.1135
+Epoch 11/40, Train_RMSELoss: 0.1180, Test_RMSELoss:0.1467
+Epoch 12/40, Train_RMSELoss: 0.1176, Test_RMSELoss:0.1184
+Epoch 13/40, Train_RMSELoss: 0.1168, Test_RMSELoss:0.1289
+Epoch 14/40, Train_RMSELoss: 0.1145, Test_RMSELoss:0.1165
+Epoch 15/40, Train_RMSELoss: 0.1113, Test_RMSELoss:0.1173
+Epoch 16/40, Train_RMSELoss: 0.1119, Test_RMSELoss:0.1224
+Epoch 17/40, Train_RMSELoss: 0.1122, Test_RMSELoss:0.1175
+Epoch 18/40, Train_RMSELoss: 0.1134, Test_RMSELoss:0.1065
+Epoch 19/40, Train_RMSELoss: 0.1116, Test_RMSELoss:0.1066
+Epoch 20/40, Train_RMSELoss: 0.1119, Test_RMSELoss:0.1238
+Epoch 21/40, Train_RMSELoss: 0.1106, Test_RMSELoss:0.1049
+Epoch 22/40, Train_RMSELoss: 0.1091, Test_RMSELoss:0.1212
+Epoch 23/40, Train_RMSELoss: 0.1090, Test_RMSELoss:0.1199
+Epoch 24/40, Train_RMSELoss: 0.1078, Test_RMSELoss:0.1143
+Epoch 25/40, Train_RMSELoss: 0.1086, Test_RMSELoss:0.1047
+Epoch 26/40, Train_RMSELoss: 0.1076, Test_RMSELoss:0.1061
+Epoch 27/40, Train_RMSELoss: 0.1083, Test_RMSELoss:0.1030
+Epoch 28/40, Train_RMSELoss: 0.1091, Test_RMSELoss:0.1027
+Epoch 29/40, Train_RMSELoss: 0.1083, Test_RMSELoss:0.0961
+Epoch 30/40, Train_RMSELoss: 0.1071, Test_RMSELoss:0.0961
+Epoch 31/40, Train_RMSELoss: 0.1068, Test_RMSELoss:0.1092
+Epoch 32/40, Train_RMSELoss: 0.1082, Test_RMSELoss:0.0970
+Epoch 33/40, Train_RMSELoss: 0.1066, Test_RMSELoss:0.1046
+Epoch 34/40, Train_RMSELoss: 0.1057, Test_RMSELoss:0.0982
+Epoch 35/40, Train_RMSELoss: 0.1070, Test_RMSELoss:0.0917
+Epoch 36/40, Train_RMSELoss: 0.1074, Test_RMSELoss:0.1020
+Epoch 37/40, Train_RMSELoss: 0.1071, Test_RMSELoss:0.1096
+Epoch 38/40, Train_RMSELoss: 0.1069, Test_RMSELoss:0.1043
+Epoch 39/40, Train_RMSELoss: 0.1055, Test_RMSELoss:0.0900
+Epoch 40/40, Train_RMSELoss: 0.1064, Test_RMSELoss:0.0916
+{"Test Loss for unit 6": 5.034051895141602, "Test Loss for unit 8": 5.1671905517578125, "Test Loss for unit 10": 4.372397422790527, "Test Loss for unit 11": 4.4099650382995605, "Test Loss for unit 13": 4.937481880187988}

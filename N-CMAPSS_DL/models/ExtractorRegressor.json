@@ -1,0 +1,66 @@
+FullModel(
+  (feature_extractor): FeatureExtractor(
+    (conv1d_1): Conv1d(20, 10, kernel_size=(3,), stride=(1,), padding=(1,))
+    (conv1d_2): Conv1d(10, 10, kernel_size=(3,), stride=(1,), padding=(1,))
+    (conv1d_3): Conv1d(10, 1, kernel_size=(3,), stride=(1,), padding=(1,))
+    (relu): ReLU()
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc): Linear(in_features=50, out_features=50, bias=True)
+  )
+  (regressor): Regressor(
+    (fc1): Linear(in_features=50, out_features=1, bias=True)
+  )
+)
+We apply the domain adaptation for l to m
+Train shape (29622, 50, 20)
+Test shape (21649, 50, 20)
+Epoch 1/50, Train_RMSELoss: 30.6580, Test_RMSELoss:19.6491
+Epoch 2/50, Train_RMSELoss: 22.2905, Test_RMSELoss:19.9805
+Epoch 3/50, Train_RMSELoss: 21.8954, Test_RMSELoss:18.8596
+Epoch 4/50, Train_RMSELoss: 20.9520, Test_RMSELoss:17.3296
+Epoch 5/50, Train_RMSELoss: 16.7077, Test_RMSELoss:10.3368
+Epoch 6/50, Train_RMSELoss: 10.2460, Test_RMSELoss:6.7258
+Epoch 7/50, Train_RMSELoss: 8.5275, Test_RMSELoss:5.5544
+Epoch 8/50, Train_RMSELoss: 8.1493, Test_RMSELoss:6.2067
+Epoch 9/50, Train_RMSELoss: 7.9028, Test_RMSELoss:5.5071
+Epoch 10/50, Train_RMSELoss: 7.6576, Test_RMSELoss:5.6742
+Epoch 11/50, Train_RMSELoss: 7.4991, Test_RMSELoss:4.6729
+Epoch 12/50, Train_RMSELoss: 7.6233, Test_RMSELoss:5.1089
+Epoch 13/50, Train_RMSELoss: 7.6446, Test_RMSELoss:5.4374
+Epoch 14/50, Train_RMSELoss: 7.4939, Test_RMSELoss:5.6528
+Epoch 15/50, Train_RMSELoss: 7.4820, Test_RMSELoss:5.0169
+Epoch 16/50, Train_RMSELoss: 7.2920, Test_RMSELoss:4.7149
+Epoch 17/50, Train_RMSELoss: 7.2064, Test_RMSELoss:6.3462
+Epoch 18/50, Train_RMSELoss: 7.3887, Test_RMSELoss:4.6542
+Epoch 19/50, Train_RMSELoss: 7.1604, Test_RMSELoss:4.8229
+Epoch 20/50, Train_RMSELoss: 7.3439, Test_RMSELoss:5.0782
+Epoch 21/50, Train_RMSELoss: 7.2984, Test_RMSELoss:4.2424
+Epoch 22/50, Train_RMSELoss: 7.2967, Test_RMSELoss:4.1115
+Epoch 23/50, Train_RMSELoss: 7.1666, Test_RMSELoss:4.4002
+Epoch 24/50, Train_RMSELoss: 7.3273, Test_RMSELoss:4.5235
+Epoch 25/50, Train_RMSELoss: 7.2852, Test_RMSELoss:4.8408
+Epoch 26/50, Train_RMSELoss: 7.1562, Test_RMSELoss:4.9421
+Epoch 27/50, Train_RMSELoss: 7.1777, Test_RMSELoss:4.7285
+Epoch 28/50, Train_RMSELoss: 7.1859, Test_RMSELoss:4.1031
+Epoch 29/50, Train_RMSELoss: 7.2373, Test_RMSELoss:5.4702
+Epoch 30/50, Train_RMSELoss: 7.1923, Test_RMSELoss:5.0721
+Epoch 31/50, Train_RMSELoss: 7.2336, Test_RMSELoss:4.4620
+Epoch 32/50, Train_RMSELoss: 7.0394, Test_RMSELoss:4.5430
+Epoch 33/50, Train_RMSELoss: 7.2472, Test_RMSELoss:4.2676
+Epoch 34/50, Train_RMSELoss: 7.1287, Test_RMSELoss:4.2143
+Epoch 35/50, Train_RMSELoss: 7.0301, Test_RMSELoss:5.0954
+Epoch 36/50, Train_RMSELoss: 6.9949, Test_RMSELoss:4.2668
+Epoch 37/50, Train_RMSELoss: 7.1076, Test_RMSELoss:4.1701
+Epoch 38/50, Train_RMSELoss: 7.1009, Test_RMSELoss:5.8395
+Epoch 39/50, Train_RMSELoss: 7.0294, Test_RMSELoss:4.2039
+Epoch 40/50, Train_RMSELoss: 7.0634, Test_RMSELoss:4.7776
+Epoch 41/50, Train_RMSELoss: 7.2849, Test_RMSELoss:4.3998
+Epoch 42/50, Train_RMSELoss: 7.0201, Test_RMSELoss:4.0847
+Epoch 43/50, Train_RMSELoss: 6.9007, Test_RMSELoss:4.1363
+Epoch 44/50, Train_RMSELoss: 6.9131, Test_RMSELoss:4.1292
+Epoch 45/50, Train_RMSELoss: 6.9654, Test_RMSELoss:4.0979
+Epoch 46/50, Train_RMSELoss: 7.1476, Test_RMSELoss:4.0717
+Epoch 47/50, Train_RMSELoss: 6.8436, Test_RMSELoss:4.2922
+Epoch 48/50, Train_RMSELoss: 6.8371, Test_RMSELoss:3.9340
+Epoch 49/50, Train_RMSELoss: 6.9481, Test_RMSELoss:3.9307
+Epoch 50/50, Train_RMSELoss: 6.8917, Test_RMSELoss:3.9012

@@ -44,7 +44,7 @@ np.random.seed(seed)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 data_filedir = os.path.join(current_dir, 'N-CMAPSS')
-data_filepath = os.path.join(current_dir, 'N-CMAPSS', 'N-CMAPSS_DS02-006.h5')
+data_filepath = os.path.join(current_dir, 'N-CMAPSS', 'N-CMAPSS_DS03-012.h5')
 
 
 
@@ -84,11 +84,11 @@ def main():
     Test units: 11, 14, 15
     '''
     # units = list(np.unique(df_A['unit']))
-    units_index_train = [2.0, 5.0, 10.0, 16.0, 18.0, 20.0]
-    units_index_test = [11.0, 14.0, 15.0]
+    units_index_train = [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]
+    units_index_test = [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]
 
     print("units_index_train", units_index_train)
-    print("units_index_test", units_index_test)
+    # print("units_index_test", units_index_test)
 
     # if any(int(idx) == unit_index for idx in units_index_train):
     #     df_train = df_train_creator(df_all, units_index_train)

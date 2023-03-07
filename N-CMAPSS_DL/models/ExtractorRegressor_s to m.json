@@ -1,0 +1,58 @@
+FullModel(
+  (feature_extractor): FeatureExtractor(
+    (conv1d_1): Conv1d(20, 32, kernel_size=(3,), stride=(1,), padding=(1,))
+    (bn_1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv1d_2): Conv1d(32, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (bn_2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv1d_3): Conv1d(64, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (bn_3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv1d_4): Conv1d(128, 256, kernel_size=(3,), stride=(1,), padding=(1,))
+    (bn_4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv1d_5): Conv1d(256, 512, kernel_size=(3,), stride=(1,), padding=(1,))
+    (bn_5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (pool): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (dropout): Dropout(p=0.5, inplace=False)
+    (relu): ReLU()
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (dense_layer_1): Linear(in_features=512, out_features=256, bias=True)
+    (bn_dense_1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dense_layer_2): Linear(in_features=256, out_features=128, bias=True)
+    (bn_dense_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (regressor): Regressor(
+    (fc1): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+We apply the domain adaptation for s to m
+Train shape (18224, 50, 20)
+Test shape (30918, 50, 20)
+Epoch 1/30, Train_RMSELoss: 0.4526, Test_RMSELoss:0.3464
+Epoch 2/30, Train_RMSELoss: 0.3235, Test_RMSELoss:0.3136
+Epoch 3/30, Train_RMSELoss: 0.3059, Test_RMSELoss:0.3054
+Epoch 4/30, Train_RMSELoss: 0.3000, Test_RMSELoss:0.3014
+Epoch 5/30, Train_RMSELoss: 0.2980, Test_RMSELoss:0.3006
+Epoch 6/30, Train_RMSELoss: 0.2942, Test_RMSELoss:0.2945
+Epoch 7/30, Train_RMSELoss: 0.2386, Test_RMSELoss:0.1958
+Epoch 8/30, Train_RMSELoss: 0.1701, Test_RMSELoss:0.2050
+Epoch 9/30, Train_RMSELoss: 0.1559, Test_RMSELoss:0.1639
+Epoch 10/30, Train_RMSELoss: 0.1500, Test_RMSELoss:0.1968
+Epoch 11/30, Train_RMSELoss: 0.1402, Test_RMSELoss:0.1755
+Epoch 12/30, Train_RMSELoss: 0.1389, Test_RMSELoss:0.1886
+Epoch 13/30, Train_RMSELoss: 0.1352, Test_RMSELoss:0.1678
+Epoch 14/30, Train_RMSELoss: 0.1325, Test_RMSELoss:0.1721
+Epoch 15/30, Train_RMSELoss: 0.1271, Test_RMSELoss:0.1588
+Epoch 16/30, Train_RMSELoss: 0.1312, Test_RMSELoss:0.1844
+Epoch 17/30, Train_RMSELoss: 0.1246, Test_RMSELoss:0.1849
+Epoch 18/30, Train_RMSELoss: 0.1256, Test_RMSELoss:0.1528
+Epoch 19/30, Train_RMSELoss: 0.1202, Test_RMSELoss:0.1595
+Epoch 20/30, Train_RMSELoss: 0.1300, Test_RMSELoss:0.1430
+Epoch 21/30, Train_RMSELoss: 0.1228, Test_RMSELoss:0.1694
+Epoch 22/30, Train_RMSELoss: 0.1218, Test_RMSELoss:0.1414
+Epoch 23/30, Train_RMSELoss: 0.1219, Test_RMSELoss:0.1565
+Epoch 24/30, Train_RMSELoss: 0.1233, Test_RMSELoss:0.1471
+Epoch 25/30, Train_RMSELoss: 0.1219, Test_RMSELoss:0.1631
+Epoch 26/30, Train_RMSELoss: 0.1178, Test_RMSELoss:0.1533
+Epoch 27/30, Train_RMSELoss: 0.1185, Test_RMSELoss:0.1512
+Epoch 28/30, Train_RMSELoss: 0.1152, Test_RMSELoss:0.1626
+Epoch 29/30, Train_RMSELoss: 0.1166, Test_RMSELoss:0.1759
+Epoch 30/30, Train_RMSELoss: 0.1173, Test_RMSELoss:0.1525

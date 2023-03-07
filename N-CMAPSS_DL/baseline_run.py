@@ -127,7 +127,7 @@ def main():
                 loss = torch.sqrt(criterion(y_pred, y_batch))
             else:
                 y_pred, mu, logvar = model(x_batch)
-                kl_divergence = -0.01 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+                kl_divergence = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
                 loss = torch.sqrt(criterion(y_pred, y_batch)) + kl_divergence # cannot be in place
             
             optimizer.zero_grad()

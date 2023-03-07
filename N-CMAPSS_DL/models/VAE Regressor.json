@@ -1,0 +1,8 @@
+VAERegressor(
+  (fc1): Linear(in_features=1000, out_features=200, bias=True)
+  (fc21): Linear(in_features=200, out_features=50, bias=True)
+  (fc22): Linear(in_features=200, out_features=50, bias=True)
+  (fc3): Linear(in_features=50, out_features=200, bias=True)
+  (fc4): Linear(in_features=200, out_features=1, bias=True)
+)
+{"Train Epochs": 50.0, "Train Loss": 16.301858219787153, "Test Loss for unit 11.0": 11.059011459350586, "Test Loss for unit 14.0": 12.222904205322266, "Test Loss for unit 15.0": 9.88762378692627, "Test Loss": 10.829999923706055}
